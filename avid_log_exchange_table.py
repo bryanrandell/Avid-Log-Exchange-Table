@@ -9,9 +9,7 @@
 import sys
 from PySide2.QtWidgets import QApplication, QFileDialog, QPushButton, QWidget, QTableWidget, \
     QTableWidgetItem, QVBoxLayout, QHBoxLayout, QLineEdit, QMessageBox
-
-from PySide2.QtCore import Slot
-from PySide2.QtCore import Qt
+from PySide2.QtCore import Slot, Qt
 from pathlib import PureWindowsPath
 import platform
 import os
