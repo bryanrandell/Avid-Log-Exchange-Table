@@ -1,5 +1,5 @@
 # Avid-Log-Exchange-Table
-A table GUI to import manipulate and save Avid Log Exchange files.
+A table GUI using PySide2 to import manipulate and save Avid Log Exchange files.
 To my knowledge, Avid Log Exchange files can't be open on any table application or can be corrupted that way.
 
 ## Hidden functions
