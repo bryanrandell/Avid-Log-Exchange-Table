@@ -4,4 +4,4 @@ To my knowledge, Avid Log Exchange files can't be open on any table application 
 
 ## Hidden functions
 You can copy a single cell (CMD + C) and paste (CMD + V) it to multiples cells or copy multiples cells.
-Didn't test it on Windows.
+Only tested in MacOS.
