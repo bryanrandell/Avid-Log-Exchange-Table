@@ -7,4 +7,4 @@ You can copy a single cell (CMD + C) and paste (CMD + V) it to multiples cells o
 Only tested in MacOS.
 
 ## Requirements
-Pyside2
+PySide2
