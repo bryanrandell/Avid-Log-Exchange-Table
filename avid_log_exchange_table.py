@@ -3,7 +3,8 @@
 
 # Avid Log Exchange Table using PySide2 QTableWidget
 # Copyright (c) 2021 Bryan Randell
-# Borrow code from some sources, mainly some pieces of code Stack Overflow
+# You can copy and paste cells and Drag and Drop an ALe file to import it
+# Borrow code from some sources, mainly some pieces of code from Stack Overflow users
 
 
 import sys
@@ -47,6 +48,7 @@ class MainWindow(QWidget):
         self.top = 0
         self.width = 300
         self.height = 200
+        self.setAcceptDrops(True)
 
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
@@ -118,7 +120,17 @@ class MainWindow(QWidget):
                     column = self.table_ale_widget.currentColumn() - self.copied_cells[0].column()
                     for cell in self.copied_cells:
                         self.table_ale_widget.setItem(cell.row() + row, cell.column() + column, QTableWidgetItem(cell.text()))
+                        
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasText():
+            event.accept()
+        else:
+            event.ignore()
 
+    def dropEvent(self, event):
+        self.ale_file_path = event.mimeData().urls()[0].toLocalFile()
+        self.createAleTable()
+                        
     def insertRowAboveTable(self):
         self.table_ale_widget.insertRow(self.table_ale_widget.currentRow())
 
@@ -242,11 +254,10 @@ class MainWindow(QWidget):
                                                                 directory=os.getcwd(),
                                                                 filter=file_filter,
                                                                 initialFilter="ALE File (*.ale )")
+        self.createAleTable()
 
-        # print(self.ale_file_path)
-        ale_file_path = self.ale_file_path
-        list_ale_file = open_and_split_tab_ale_file(ale_file_path=ale_file_path)
-        # print(list_ale_file)
+    def createAleTable(self):
+        list_ale_file = open_and_split_tab_ale_file(ale_file_path=self.ale_file_path)
         self.table_ale_widget.clear()
         self.table_ale_widget.setRowCount(len(list_ale_file))
         self.table_ale_widget.setColumnCount(len(max(list_ale_file, key=len)))
@@ -258,9 +269,7 @@ class MainWindow(QWidget):
         self.table_ale_widget.adjustSize()
         # print(self.tableWidget.geometry())
         self.adjustSize()
-
         self.table_ale_widget.doubleClicked.connect(self.on_click)
-
 
     # Using this method only with terminal output
     @Slot()
