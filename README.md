@@ -8,6 +8,8 @@ $ pip install pyinstaller
 and use the build.sh
 ``
 $ chmod +x build.sh
+``
+``
 $ ./build.sh
 ``
 
